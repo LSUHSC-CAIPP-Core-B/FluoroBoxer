@@ -38,9 +38,12 @@ if st.sidebar.button('Reset Parameters'):
     st.rerun()
 
 # Save parameters
-if st.sidebar.button('Save Parameters'):
+saveParameters = st.sidebar.popover("Save Parameters")
+saveParamInput = saveParameters.text_input("Description", placeholder="Enter Description here")
+
+if saveParamInput:
     save_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-    new_row = [save_time, brightness_val, contrast_val, threshold_val, i_erode_val, i_dialate_val]
+    new_row = [save_time, brightness_val, contrast_val, threshold_val, i_erode_val, i_dialate_val, saveParamInput]
     
     with open('params.csv', 'a', newline='') as fd:
         writer = csv.writer(fd)
