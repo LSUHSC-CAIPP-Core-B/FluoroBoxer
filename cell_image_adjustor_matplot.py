@@ -93,7 +93,7 @@ img_out = draw_contours(img_dilation, img_base)
 
 if not st.session_state.zoom_mode:
     # Main display
-    st.title("Cell Image Processor")
+    st.title("Cell Processor")
 
     # Display images in a grid
     col1, col2, col3 = st.columns(3)
