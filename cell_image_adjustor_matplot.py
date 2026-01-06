@@ -99,20 +99,20 @@ if not st.session_state.zoom_mode:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        col_title1, col_zoom1 = st.columns([3, 1])
-        with col_title1:
+        input_col_title, input_col_zoom = st.columns([3, 1])
+        with input_col_title:
             st.subheader("Input")
-        with col_zoom1:
+        with input_col_zoom:
             if st.button("Zoom", key="zoom_input"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Input"
                 st.rerun()
         st.image(img, use_container_width=True, clamp=True)
         
-        col_title2, col_zoom2 = st.columns([3, 1])
-        with col_title2:
+        erosion_col_title, erosion_col_zoom = st.columns([3, 1])
+        with erosion_col_title:
             st.subheader("Erosion")
-        with col_zoom2:
+        with erosion_col_zoom:
             if st.button("Zoom", key="zoom_input2"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Erosion"
@@ -120,20 +120,20 @@ if not st.session_state.zoom_mode:
         st.image(img_erosion, use_container_width=True, clamp=True)
 
     with col2:
-        col_title3, col_zoom3 = st.columns([3, 1])
-        with col_title3:
+        brightness_col_title, brightness_col_zoom = st.columns([3, 1])
+        with brightness_col_title:
             st.subheader("Brightness/Constrast")
-        with col_zoom3:
+        with brightness_col_zoom:
             if st.button("Zoom", key="brightness_zoom_input"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Brightness/Contrast"
                 st.rerun()
         st.image(img_br, use_container_width=True, clamp=True)
         
-        col_title4, col_zoom4 = st.columns([3, 1])
-        with col_title4:
+        dilation_col_title, dilation_col_zoom = st.columns([3, 1])
+        with dilation_col_title:
             st.subheader("Dilation")
-        with col_zoom4:
+        with dilation_col_zoom:
             if st.button("Zoom", key="dilation_zoom_input"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Dilation"
@@ -141,20 +141,20 @@ if not st.session_state.zoom_mode:
         st.image(img_dilation, use_container_width=True, clamp=True)
 
     with col3:
-        col_title5, col_zoom5 = st.columns([3, 1])
-        with col_title5:
+        threshold_col_title, threshold_col_zoom = st.columns([3, 1])
+        with threshold_col_title:
             st.subheader("Threshold")
-        with col_zoom5:
+        with threshold_col_zoom:
             if st.button("Zoom", key="threshold_zoom_input"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Threshold"
                 st.rerun()
         st.image(img_thr, use_container_width=True, clamp=True)
         
-        col_title6, col_zoom6 = st.columns([3, 1])
-        with col_title6:
+        output_col_title, output_col_zoom = st.columns([3, 1])
+        with output_col_title:
             st.subheader("Output")
-        with col_zoom6:
+        with output_col_zoom:
             if st.button("Zoom", key="output_zoom_input"):
                 st.session_state.zoom_mode = True
                 st.session_state.zoom_image = "Output"
