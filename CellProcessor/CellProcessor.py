@@ -1,6 +1,7 @@
 import cv2
 import imutils
 import numpy as np
+import pandas as pd
 
 # Set of functions to work with dataset
 
@@ -234,3 +235,34 @@ def crop_img_from_label(img, yolo_label, padding=0, retCords=False, withMask=Fal
         return img_crop, img_mask
     else:
         return img_crop
+
+def list_variables() -> pd.DataFrame:
+    return pd.read_csv("params.csv")
+
+def list_dataset() -> pd.DataFrame:
+    return pd.read_csv("dataset.csv")
+
+def use_variables(ID) -> dict[str, dict[int, str]]:
+    df = pd.read_csv("params.csv")
+    selected_row = df[df["ID"] == ID]
+    return selected_row.to_dict()
+
+def use_Dataset(ID) -> tuple[str, str]:
+    df =  pd.read_csv("dataset.csv")
+    IMAGES_PATH = df[df.ID ==ID].iloc[0,3]
+    CELL_TYPE = df[df.ID ==ID].iloc[0,1]
+
+    GREEN_PATH = IMAGES_PATH + CELL_TYPE + "_Green/"
+    PHASE_PATH = IMAGES_PATH + CELL_TYPE + "_Phase/"
+    return PHASE_PATH, GREEN_PATH
+
+class PreprocessVal:
+    #N/A HT29 pt2 - 02/02
+    # contrast and brightness
+    brightness = -18.2 #-9.26
+    contrast = 12.0
+    # thresh to get all the stained cells
+    threshold = 42
+    # erode and dialate to erase noise
+    i_erode = 2
+    i_dialate = 3
