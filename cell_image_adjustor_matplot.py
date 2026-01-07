@@ -4,8 +4,10 @@ import random
 from datetime import datetime
 import streamlit as st
 
-from config import *
-from CellProcessor import read_image, process_image, draw_contours
+from CellProcessor import *
+
+PreprocessVal = CellProcessor.PreprocessVal
+PHASE_PATH, GREEN_PATH = CellProcessor.use_Dataset(1)
 
 # Page config
 st.set_page_config(layout="wide", page_title="Cell Image Processor")
@@ -31,11 +33,11 @@ st.sidebar.header("Image Processing Parameters")
 # Create unique keys using reset counter
 reset_key = st.session_state.reset_counter
 
-brightness_val = st.sidebar.slider('Brightness', -35.0, 50.0, float(brightness), key=f'brightness_{reset_key}')
-contrast_val = st.sidebar.slider('Contrast', -5.0, 25.0, float(contrast), key=f'contrast_{reset_key}')
-threshold_val = st.sidebar.slider('Threshold', 0, 255, int(threshold), key=f'threshold_{reset_key}')
-i_erode_val = st.sidebar.slider('Erosion', 0, 15, int(i_erode), key=f'erosion_{reset_key}')
-i_dialate_val = st.sidebar.slider('Dilation', 0, 15, int(i_dialate), key=f'dilation_{reset_key}')
+brightness_val = st.sidebar.slider('Brightness', -35.0, 50.0, float(PreprocessVal.brightness), key=f'brightness_{reset_key}')
+contrast_val = st.sidebar.slider('Contrast', -5.0, 25.0, float(PreprocessVal.contrast), key=f'contrast_{reset_key}')
+threshold_val = st.sidebar.slider('Threshold', 0, 255, int(PreprocessVal.threshold), key=f'threshold_{reset_key}')
+i_erode_val = st.sidebar.slider('Erosion', 0, 15, int(PreprocessVal.i_erode), key=f'erosion_{reset_key}')
+i_dialate_val = st.sidebar.slider('Dilation', 0, 15, int(PreprocessVal.i_dialate), key=f'dilation_{reset_key}')
 
 # Reset button
 if st.sidebar.button('Reset Parameters'):
