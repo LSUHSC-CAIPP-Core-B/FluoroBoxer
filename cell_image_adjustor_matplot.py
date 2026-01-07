@@ -48,14 +48,18 @@ if st.sidebar.button('Reset Parameters'):
 saveParameters = st.sidebar.popover("Save Parameters")
 saveParamInput = saveParameters.text_input("Description", placeholder="Enter Description here")
 
-if saveParamInput:
-    save_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-    new_row = [save_time, brightness_val, contrast_val, threshold_val, i_erode_val, i_dialate_val, saveParamInput]
-    
-    with open('params.csv', 'a', newline='') as fd:
-        writer = csv.writer(fd)
-        writer.writerow(new_row)
-    st.sidebar.success('Parameters saved!')
+if saveParameters.button("Save"):
+    if saveParamInput:
+        save_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        df = CellProcessor.list_variables()
+
+        last_index = int(df["ID"].iloc[-1]) + 1
+        new_row = [last_index, save_time, brightness_val, contrast_val, threshold_val, i_erode_val, i_dialate_val, saveParamInput]
+        
+        with open('params.csv', 'a', newline='') as fd:
+            writer = csv.writer(fd)
+            writer.writerow(new_row)
+        st.sidebar.success('Parameters saved!')
 
 # Image navigation
 st.sidebar.header("Image Navigation")
@@ -68,7 +72,7 @@ with col1:
             st.rerun()
 
 with col2:
-    if st.button('🎲 Random'):
+    if st.button('Random'):
         st.session_state.curr_image_num = random.randint(0, st.session_state.len_images - 1)
         st.rerun()
 

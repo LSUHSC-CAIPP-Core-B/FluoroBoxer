@@ -242,12 +242,10 @@ def list_variables() -> pd.DataFrame:
 def list_dataset() -> pd.DataFrame:
     return pd.read_csv("dataset.csv")
 
-def use_variables(index) -> dict[str, dict[int, str]]:
+def use_variables(ID) -> dict[str, dict[int, str]]:
     df = pd.read_csv("params.csv")
-    df.insert(loc=0, column='Index', value=range(len(df)))
-
-    selected_row = df[df["Index"] == index]
-    return selected_row.drop('Index', axis=1).to_dict()
+    selected_row = df[df["ID"] == ID]
+    return selected_row.to_dict()
 
 def use_Dataset(ID) -> tuple[str, str]:
     df =  pd.read_csv("dataset.csv")
