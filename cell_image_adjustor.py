@@ -122,7 +122,7 @@ if not st.session_state.enlarge_mode:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        input_col_title, input_col_toggle, input_col_enlarge = st.columns([1, 2, 1])
+        input_col_title, input_col_toggle, input_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with input_col_title:
             st.subheader("Input")
 
@@ -153,7 +153,7 @@ if not st.session_state.enlarge_mode:
         st.image(img_erosion, use_container_width=True, clamp=True)
 
     with col2:
-        brightness_col_title, brightness_col_toggle, brightness_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
+        brightness_col_title, brightness_col_toggle, brightness_col_enlarge = st.columns([2, 1, 1], vertical_alignment="bottom")
         with brightness_col_title:
             st.subheader("Brightness/Constrast")
         
