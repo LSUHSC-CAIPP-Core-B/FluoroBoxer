@@ -5,9 +5,12 @@ from datetime import datetime
 import streamlit as st
 
 from CellProcessor import *
-
 PreprocessVal = CellProcessor.PreprocessVal
-PHASE_PATH, GREEN_PATH = CellProcessor.use_Dataset(1)
+
+dataset  = use_dataset(1)
+GREEN_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Green/")
+PHASE_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Phase/")
+
 
 # Page config
 st.set_page_config(layout="wide", page_title="Cell Image Processor")

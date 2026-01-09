@@ -2,6 +2,7 @@ import cv2
 import imutils
 import numpy as np
 import pandas as pd
+import os
 
 # Set of functions to work with dataset
 
@@ -245,16 +246,12 @@ def list_dataset() -> pd.DataFrame:
 def use_variables(ID) -> dict[str, dict[int, str]]:
     df = pd.read_csv("params.csv")
     selected_row = df[df["ID"] == ID]
-    return selected_row.to_dict()
+    return selected_row.iloc[0].to_dict()
 
-def use_Dataset(ID) -> tuple[str, str]:
+def use_dataset(ID) -> tuple[str, str]:
     df =  pd.read_csv("dataset.csv")
-    IMAGES_PATH = df[df.ID ==ID].iloc[0,3]
-    CELL_TYPE = df[df.ID ==ID].iloc[0,1]
-
-    GREEN_PATH = IMAGES_PATH + CELL_TYPE + "_Green/"
-    PHASE_PATH = IMAGES_PATH + CELL_TYPE + "_Phase/"
-    return PHASE_PATH, GREEN_PATH
+    selected_row = df[df["ID"] == ID]
+    return selected_row.iloc[0].to_dict()
 
 class PreprocessVal:
     #N/A HT29 pt2 - 02/02
