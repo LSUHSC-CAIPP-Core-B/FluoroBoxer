@@ -110,9 +110,14 @@ if not st.session_state.enlarge_mode:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        input_col_title, input_col_enlarge = st.columns([3, 1])
+        input_col_title, input_col_toggle, input_col_enlarge = st.columns([1, 2, 1])
         with input_col_title:
             st.subheader("Input")
+
+        with input_col_toggle:
+            if st.toggle("Cell Boxing", key="input_toggle"):
+                img = draw_contours(img_dilation, img)
+
         with input_col_enlarge:
             if st.button("Enlarge", key="enlarge_input"):
                 st.session_state.enlarge_mode = True
@@ -120,9 +125,14 @@ if not st.session_state.enlarge_mode:
                 st.rerun()
         st.image(img, use_container_width=True, clamp=True)
         
-        erosion_col_title, erosion_col_enlarge = st.columns([3, 1])
+        erosion_col_title, erosion_col_toggle, erosion_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with erosion_col_title:
             st.subheader("Erosion")
+
+        with erosion_col_toggle:
+            if st.toggle("Cell Boxing", key="erosion_toggle"):
+                img_erosion = draw_contours(img_dilation, img_erosion)
+
         with erosion_col_enlarge:
             if st.button("Enlarge", key="Enlarge_input2"):
                 st.session_state.enlarge_mode = True
@@ -131,9 +141,14 @@ if not st.session_state.enlarge_mode:
         st.image(img_erosion, use_container_width=True, clamp=True)
 
     with col2:
-        brightness_col_title, brightness_col_enlarge = st.columns([3, 1])
+        brightness_col_title, brightness_col_toggle, brightness_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with brightness_col_title:
             st.subheader("Brightness/Constrast")
+        
+        with brightness_col_toggle:
+            if st.toggle("Cell Boxing", key="brightness_toggle"):
+                img_br = draw_contours(img_dilation, img_br)
+
         with brightness_col_enlarge:
             if st.button("Enlarge", key="brightness_enlarge_input"):
                 st.session_state.enlarge_mode = True
@@ -141,9 +156,14 @@ if not st.session_state.enlarge_mode:
                 st.rerun()
         st.image(img_br, use_container_width=True, clamp=True)
         
-        dilation_col_title, dilation_col_enlarge = st.columns([3, 1])
+        dilation_col_title, dilation_col_toggle, dilation_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with dilation_col_title:
             st.subheader("Dilation")
+        
+        with dilation_col_toggle:
+            if st.toggle("Cell Boxing", key="dilation_toggle"):
+                img_dilation = draw_contours(img_dilation, img_dilation)
+
         with dilation_col_enlarge:
             if st.button("Enlarge", key="dilation_enlarge_input"):
                 st.session_state.enlarge_mode = True
@@ -152,9 +172,14 @@ if not st.session_state.enlarge_mode:
         st.image(img_dilation, use_container_width=True, clamp=True)
 
     with col3:
-        threshold_col_title, threshold_col_enlarge = st.columns([3, 1])
+        threshold_col_title, threshold_col_toggle, threshold_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with threshold_col_title:
             st.subheader("Threshold")
+
+        with threshold_col_toggle:
+            if st.toggle("Cell Boxing", key="threshold_toggle"):
+                img_thr = draw_contours(img_dilation, img_thr)
+
         with threshold_col_enlarge:
             if st.button("Enlarge", key="threshold_enlarge_input"):
                 st.session_state.enlarge_mode = True
@@ -162,9 +187,10 @@ if not st.session_state.enlarge_mode:
                 st.rerun()
         st.image(img_thr, use_container_width=True, clamp=True)
         
-        output_col_title, output_col_enlarge = st.columns([3, 1])
+        output_col_title, output_col_enlarge = st.columns([3, 1], vertical_alignment="bottom")
         with output_col_title:
             st.subheader("Output")
+
         with output_col_enlarge:
             if st.button("Enlarge", key="output_enlarge_input"):
                 st.session_state.enlarge_mode = True
