@@ -21,10 +21,10 @@ if 'curr_image_num' not in st.session_state:
     st.session_state.images = os.listdir(GREEN_PATH)
     st.session_state.len_images = len(st.session_state.images)
 
-# Initialize zoom state
-if 'zoom_mode' not in st.session_state:
-    st.session_state.zoom_mode = False
-    st.session_state.zoom_image = None
+# Initialize enlarge state
+if 'enlarge_mode' not in st.session_state:
+    st.session_state.enlarge_mode = False
+    st.session_state.enlarge_image = None
 
 # Initialize reset counter
 if 'reset_counter' not in st.session_state:
@@ -100,7 +100,7 @@ img_br, img_thr, img_erosion, img_dilation = process_image(
 )
 img_out = draw_contours(img_dilation, img_base)
 
-if not st.session_state.zoom_mode:
+if not st.session_state.enlarge_mode:
     # Main display
     st.title("Cell Processor")
 
@@ -108,88 +108,88 @@ if not st.session_state.zoom_mode:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        input_col_title, input_col_zoom = st.columns([3, 1])
+        input_col_title, input_col_enlarge = st.columns([3, 1])
         with input_col_title:
             st.subheader("Input")
-        with input_col_zoom:
-            if st.button("Zoom", key="zoom_input"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Input"
+        with input_col_enlarge:
+            if st.button("Enlarge", key="enlarge_input"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Input"
                 st.rerun()
         st.image(img, use_container_width=True, clamp=True)
         
-        erosion_col_title, erosion_col_zoom = st.columns([3, 1])
+        erosion_col_title, erosion_col_enlarge = st.columns([3, 1])
         with erosion_col_title:
             st.subheader("Erosion")
-        with erosion_col_zoom:
-            if st.button("Zoom", key="zoom_input2"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Erosion"
+        with erosion_col_enlarge:
+            if st.button("Enlarge", key="Enlarge_input2"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Erosion"
                 st.rerun()
         st.image(img_erosion, use_container_width=True, clamp=True)
 
     with col2:
-        brightness_col_title, brightness_col_zoom = st.columns([3, 1])
+        brightness_col_title, brightness_col_enlarge = st.columns([3, 1])
         with brightness_col_title:
             st.subheader("Brightness/Constrast")
-        with brightness_col_zoom:
-            if st.button("Zoom", key="brightness_zoom_input"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Brightness/Contrast"
+        with brightness_col_enlarge:
+            if st.button("Enlarge", key="brightness_enlarge_input"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Brightness/Contrast"
                 st.rerun()
         st.image(img_br, use_container_width=True, clamp=True)
         
-        dilation_col_title, dilation_col_zoom = st.columns([3, 1])
+        dilation_col_title, dilation_col_enlarge = st.columns([3, 1])
         with dilation_col_title:
             st.subheader("Dilation")
-        with dilation_col_zoom:
-            if st.button("Zoom", key="dilation_zoom_input"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Dilation"
+        with dilation_col_enlarge:
+            if st.button("Enlarge", key="dilation_enlarge_input"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Dilation"
                 st.rerun()
         st.image(img_dilation, use_container_width=True, clamp=True)
 
     with col3:
-        threshold_col_title, threshold_col_zoom = st.columns([3, 1])
+        threshold_col_title, threshold_col_enlarge = st.columns([3, 1])
         with threshold_col_title:
             st.subheader("Threshold")
-        with threshold_col_zoom:
-            if st.button("Zoom", key="threshold_zoom_input"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Threshold"
+        with threshold_col_enlarge:
+            if st.button("Enlarge", key="threshold_enlarge_input"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Threshold"
                 st.rerun()
         st.image(img_thr, use_container_width=True, clamp=True)
         
-        output_col_title, output_col_zoom = st.columns([3, 1])
+        output_col_title, output_col_enlarge = st.columns([3, 1])
         with output_col_title:
             st.subheader("Output")
-        with output_col_zoom:
-            if st.button("Zoom", key="output_zoom_input"):
-                st.session_state.zoom_mode = True
-                st.session_state.zoom_image = "Output"
+        with output_col_enlarge:
+            if st.button("Enlarge", key="output_enlarge_input"):
+                st.session_state.enlarge_mode = True
+                st.session_state.enlarge_image = "Output"
                 st.rerun()
         st.image(img_out, use_container_width=True, clamp=True)
 else:
-    # Zoom view
-    st.title(f"Cell Image Processor - {st.session_state.zoom_image}")
+    # Enlarge view
+    st.title(f"Cell Image Processor - {st.session_state.enlarge_image}")
     
     # Back button
     if st.button("← Back to Gallery"):
-        st.session_state.zoom_mode = False
+        st.session_state.enlarge_mode = False
         st.rerun()
     
-    # Display the zoomed image based on zoom_image value
-    if st.session_state.zoom_image == "Input":
+    # Display the enlarged image based on enlarge_image value
+    if st.session_state.enlarge_image == "Input":
         st.image(img, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Brightness/Contrast":
+    elif st.session_state.enlarge_image == "Brightness/Contrast":
         st.image(img_br, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Erosion":
+    elif st.session_state.enlarge_image == "Erosion":
         st.image(img_erosion, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Brightness/Contrast":
+    elif st.session_state.enlarge_image == "Brightness/Contrast":
         st.image(img_br, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Dilation":
+    elif st.session_state.enlarge_image == "Dilation":
         st.image(img_dilation, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Threshold":
+    elif st.session_state.enlarge_image == "Threshold":
         st.image(img_thr, use_container_width=True, clamp=True)
-    elif st.session_state.zoom_image == "Output":
+    elif st.session_state.enlarge_image == "Output":
         st.image(img_out, use_container_width=True, clamp=True)
