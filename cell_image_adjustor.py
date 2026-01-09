@@ -7,13 +7,15 @@ import streamlit as st
 from CellProcessor import *
 PreprocessVal = CellProcessor.PreprocessVal
 
-dataset  = use_dataset(1)
-GREEN_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Green/")
-PHASE_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Phase/")
-
-
 # Page config
 st.set_page_config(layout="wide", page_title="Cell Image Processor")
+
+st.sidebar.header("Select Dataset")
+dataset_number = st.sidebar.selectbox("Dataset", [str(i) for i in range(1, (get_dataset_len()) + 1)], index=0)
+
+dataset  = use_dataset(int(dataset_number))
+GREEN_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Green/")
+PHASE_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset['Cell_type'] + "_Phase/")
 
 # Initialize session state
 if 'curr_image_num' not in st.session_state:
