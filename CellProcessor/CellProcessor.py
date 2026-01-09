@@ -253,6 +253,9 @@ def use_dataset(ID) -> tuple[str, str]:
     selected_row = df[df["ID"] == ID]
     return selected_row.iloc[0].to_dict()
 
+def get_dataset_len() -> int:
+    return len(list_dataset())
+
 class PreprocessVal:
     #N/A HT29 pt2 - 02/02
     # contrast and brightness
