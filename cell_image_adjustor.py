@@ -28,6 +28,18 @@ if 'enlarge_mode' not in st.session_state:
     st.session_state.enlarge_mode = False
     st.session_state.enlarge_image = None
 
+# Initialize toggle states
+if 'input_toggle' not in st.session_state:
+    st.session_state.input_toggle = False
+if 'erosion_toggle' not in st.session_state:
+    st.session_state.erosion_toggle = False
+if 'brightness_toggle' not in st.session_state:
+    st.session_state.brightness_toggle = False
+if 'dilation_toggle' not in st.session_state:
+    st.session_state.dilation_toggle = False
+if 'threshold_toggle' not in st.session_state:
+    st.session_state.threshold_toggle = False
+
 # Initialize reset counter
 if 'reset_counter' not in st.session_state:
     st.session_state.reset_counter = 0
@@ -205,19 +217,32 @@ else:
     if st.button("← Back to Gallery"):
         st.session_state.enlarge_mode = False
         st.rerun()
-    
-    # Display the enlarged image based on enlarge_image value
+
+# Display the enlarged image based on enlarge_image value
     if st.session_state.enlarge_image == "Input":
+        if st.session_state.input_toggle:
+            img = draw_contours(img_dilation, img) 
         st.image(img, use_container_width=True, clamp=True)
+
     elif st.session_state.enlarge_image == "Brightness/Contrast":
+        if st.session_state.brightness_toggle:
+            img_br = draw_contours(img_dilation, img_br)
         st.image(img_br, use_container_width=True, clamp=True)
+
     elif st.session_state.enlarge_image == "Erosion":
+        if st.session_state.erosion_toggle:
+            img_erosion = draw_contours(img_dilation, img_erosion)
         st.image(img_erosion, use_container_width=True, clamp=True)
-    elif st.session_state.enlarge_image == "Brightness/Contrast":
-        st.image(img_br, use_container_width=True, clamp=True)
+
     elif st.session_state.enlarge_image == "Dilation":
+        if st.session_state.dilation_toggle:
+            img_dilation = draw_contours(img_dilation, img_dilation)
         st.image(img_dilation, use_container_width=True, clamp=True)
+
     elif st.session_state.enlarge_image == "Threshold":
+        if st.session_state.threshold_toggle:
+            img_thr = draw_contours(img_dilation, img_thr)
         st.image(img_thr, use_container_width=True, clamp=True)
+
     elif st.session_state.enlarge_image == "Output":
         st.image(img_out, use_container_width=True, clamp=True)
