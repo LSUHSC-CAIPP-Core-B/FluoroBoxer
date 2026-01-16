@@ -207,9 +207,13 @@ if not st.session_state.enlarge_mode:
                 st.rerun()
         st.image(img_thr, use_container_width=True, clamp=True)
         
-        output_col_title, output_col_enlarge = st.columns([3, 1], vertical_alignment="bottom")
+        output_col_title, output_col_toggle, output_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with output_col_title:
             st.subheader("Output")
+
+        with output_col_toggle:
+            if not st.toggle("Cell Boxing", value=True, key="output_toggle"):
+                img_out = img_base
 
         with output_col_enlarge:
             if st.button("Enlarge", key="output_enlarge_input"):
