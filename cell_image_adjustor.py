@@ -24,7 +24,11 @@ PHASE_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset
 # Initialize session state
 if 'curr_image_num' not in st.session_state:
     st.session_state.curr_image_num = 0
-    st.session_state.images = os.listdir(GREEN_PATH)
+
+    st.session_state.images = [
+        file for file in os.listdir(GREEN_PATH)
+        if file.lower().endswith(('png', 'jpg', 'jpeg'))
+    ]
     st.session_state.len_images = len(st.session_state.images)
 
 # Initialize enlarge state
