@@ -1,0 +1,37 @@
+<annotation>
+  <folder>Data/final_Data_set/images/val</folder>
+  <filename>VID856_B4_1_00d04h00m_9_0.png</filename>
+  <source>
+    <database>Cell Death Detection Database</database>
+  </source>
+  <size>
+    <width>128</width>
+    <height>128</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>1</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>94</xmin>
+      <ymin>99</ymin>
+      <xmax>117</xmax>
+      <ymax>122</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>1</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>81</xmin>
+      <ymin>70</ymin>
+      <xmax>104</xmax>
+      <ymax>93</ymax>
+    </bndbox>
+  </object>
+</annotation>
