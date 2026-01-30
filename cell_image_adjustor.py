@@ -226,7 +226,7 @@ else:
     st.title(f"Cell Image Processor - {st.session_state.enlarge_image}")
     
     # Back button
-    if st.button("← Back to Gallery"):
+    if st.button("⬅ Back to Gallery"):
         st.session_state.enlarge_mode = False
         st.rerun()
 
@@ -262,5 +262,6 @@ else:
         st.image(img_thr, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Output":
-        st.toggle("Cell Boxing", key="output_toggle")
+        if not st.toggle("Cell Boxing", value=True, key="output_toggle"):
+            img_out = img_base
         st.image(img_out, use_container_width=True, clamp=True)
