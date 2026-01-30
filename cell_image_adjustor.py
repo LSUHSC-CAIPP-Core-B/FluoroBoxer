@@ -226,35 +226,42 @@ else:
     st.title(f"Cell Image Processor - {st.session_state.enlarge_image}")
     
     # Back button
-    if st.button("← Back to Gallery"):
+    if st.button("⬅ Back to Gallery"):
         st.session_state.enlarge_mode = False
         st.rerun()
 
-# Display the enlarged image based on enlarge_image value
+    # Display the enlarged image based on enlarge_image value
     if st.session_state.enlarge_image == "Input":
+        st.toggle("Cell Boxing", key="input_toggle")
         if st.session_state.input_toggle:
             img = draw_contours(img_dilation, img) 
         st.image(img, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Brightness/Contrast":
+        st.toggle("Cell Boxing", key="brightness_toggle")
         if st.session_state.brightness_toggle:
             img_br = draw_contours(img_dilation, img_br)
         st.image(img_br, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Erosion":
+        st.toggle("Cell Boxing", key="erosion_toggle")
         if st.session_state.erosion_toggle:
             img_erosion = draw_contours(img_dilation, img_erosion)
         st.image(img_erosion, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Dilation":
+        st.toggle("Cell Boxing", key="dilation_toggle")
         if st.session_state.dilation_toggle:
             img_dilation = draw_contours(img_dilation, img_dilation)
         st.image(img_dilation, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Threshold":
+        st.toggle("Cell Boxing", key="threshold_toggle")
         if st.session_state.threshold_toggle:
             img_thr = draw_contours(img_dilation, img_thr)
         st.image(img_thr, use_container_width=True, clamp=True)
 
     elif st.session_state.enlarge_image == "Output":
+        if not st.toggle("Cell Boxing", value=True, key="output_toggle"):
+            img_out = img_base
         st.image(img_out, use_container_width=True, clamp=True)
