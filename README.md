@@ -1,5 +1,5 @@
 # Data preprocessing
-Everything conected to working with the dataset.
+Everything connected to working with the dataset.
 
 ## Cell Adjustor
 `cell_image_adjustor_marplot.py`   
@@ -11,22 +11,22 @@ You need to provide *dataset path* in *config.py* to iterate over. To adjust par
 ## Labeling
 `label_cell_images.ipynb`    
 Iterate over images in the provided directory and for each image crop part of it to gen mask and label (yolo format).
-We cover the whole image while croping. The Crop params and path might need to be adjusted for different datasets to match iamge size and desired overlap of crops.
+We cover the whole image while croping. The Crop params and path might need to be adjusted for different datasets to match image size and desired overlap of crops.
 
 `get_background_images.ipynb`   
-Use this to get background images that do not contain dead cells. It does the exact same process that the previous scrip does but instead of getting the images with prediction, it looks for the empty ones.
+Use this to get background images that do not contain dead cells. It does the exact same process that the previous script does but instead of getting the images with prediction, it looks for the empty ones.
 
-## Augumentation
-`augument_cell_iamges.ipynb`   
-Augumentations are only a change in brightness and contrast. We augument images, labels, masks at the same time.
+## Augmentation
+`augment_cell_iamges.ipynb`   
+Augmentations are only a change in brightness and contrast. We augment images, labels, and masks at the same time.
 
 ## Spliting
 `split_dataset.ipynb`   
-Split augumented files into train, val, and test parts.
+Split augmented files into train, val, and test parts.
 
 ## Labels formats etc.
 `yolo_to_xml.py` and `xml_to_tfrecord.py`   
-Theese files change the format of labels to needed formats (xml, tfrecord).
+These files change the format of labels to needed formats (xml, tfrecord).
 Specific params and paths might have to be adjusted depending on the dataset.
    
 `change_yolo_class_num.py`   
@@ -34,7 +34,7 @@ Script to change yolo class numbers in label files.
 
 ## Visualization
 `box_rand_images.ipynb`   
-Notbeook to visualise random images with bounding boxes.   
+Notebook to visualize random images with bounding boxes.   
 
 ## CellProcessor
 File with variety of functions used along all the data processing. Functions are used exactly for labeling, reading images, converting labels and general visualization.
