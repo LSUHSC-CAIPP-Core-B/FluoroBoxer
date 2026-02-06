@@ -238,22 +238,48 @@ def crop_img_from_label(img, yolo_label, padding=0, retCords=False, withMask=Fal
         return img_crop
 
 def list_variables() -> pd.DataFrame:
+    """Returns a dataframe of saved parameters from params.csv
+
+    return: pd.DataFrame of saved parameters
+    """
     return pd.read_csv("params.csv")
 
 def list_dataset() -> pd.DataFrame:
+    """Returns a dataframe of datasets from params.csv
+
+    return: pd.DataFrame of datasets
+    """
     return pd.read_csv("dataset.csv")
 
 def use_variables(ID) -> dict[str, dict[int, str]]:
+    """Reads from params.csv and generates a pd.Dataframe.
+    Filters Dataframe by ID and returns it converted to a dict
+
+    ID (str): ID to filter by
+
+    return: Dictionary of matching paramters
+    """
     df = pd.read_csv("params.csv")
     selected_row = df[df["ID"] == ID]
     return selected_row.iloc[0].to_dict()
 
-def use_dataset(ID) -> tuple[str, str]:
+def use_dataset(ID) -> dict[str, dict[int, str]]:
+    """Reads from dataset.csv and generates a pd.Dataframe
+    Filters Dataframe by ID and returns it converted to a dict
+
+    ID (str): ID to filter by
+
+    return: Dictionary of matching Datasets
+    """
     df =  pd.read_csv("dataset.csv")
     selected_row = df[df["ID"] == ID]
     return selected_row.iloc[0].to_dict()
 
 def get_dataset_len() -> int:
+    """Returns the number of datasets
+
+    return: amount of datasets
+    """
     return len(list_dataset())
 
 class PreprocessVal:
