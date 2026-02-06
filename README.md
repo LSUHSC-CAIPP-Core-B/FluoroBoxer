@@ -1,12 +1,12 @@
 # Data preprocessing
 Everything connected to working with the dataset.
 
-## Cell Adjustor
-`cell_image_adjustor_marplot.py`   
-Script to preview cell images and check the output of each step of preprocessing. You can also change params of preprocessing to adjust the cell mask and label creation accuracy.  
+## Cell Image Projection
+`cell_image_projection.py`   
+Interactive Streamlit application for viewing cell images and validating processing pipeline outputs. Provides real-time visualization of each processing step with adjustable parameters.
 
 **How to use:**
-You need to provide *dataset path* in *config.py* to iterate over. To adjust params change the sliders. To keep current configuration press the save button and params will be stored in *params.csv* with the date of the save. Next and back button move through iamges but you can use random button to pick different image. Reset button resets current params to initial ones that were used on opening the app.   
+Select a dataset from the sidebar dropdown to begin processing images. Adjust preprocessing parameters using the sliders for brightness, contrast, threshold, erosion, and dilation. Use the toggle switches to overlay cell boxing on any processing stage. Navigate through images using the Back, Next, or Random buttons. Click "Enlarge" on any image to view it in full-screen mode. Press "Save Parameters" to store your current configuration in `params.csv` with a timestamp and description. The "Reset Parameters" button restores all sliders to their default values.
 
 ## Labeling
 `label_cell_images.ipynb`    
