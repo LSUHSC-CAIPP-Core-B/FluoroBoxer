@@ -8,7 +8,7 @@ from CellProcessor import *
 PreprocessVal = CellProcessor.PreprocessVal
 
 # Page config
-st.set_page_config(layout="wide", page_title="Cell Image Processor")
+st.set_page_config(layout="wide", page_title="Cell Image Projection")
 
 st.sidebar.header("Select Dataset")
 dataset_number = st.sidebar.selectbox(
@@ -124,7 +124,7 @@ img_out = draw_contours(img_dilation, img_base)
 
 if not st.session_state.enlarge_mode:
     # Main display
-    st.title("Cell Processor")
+    st.title("Cell Image Projection")
 
     # Display images in a grid
     col1, col2, col3 = st.columns(3)
@@ -223,7 +223,7 @@ if not st.session_state.enlarge_mode:
         st.image(img_out, use_container_width=True, clamp=True)
 else:
     # Enlarge view
-    st.title(f"Cell Image Processor - {st.session_state.enlarge_image}")
+    st.title(f"Cell Image Projection - {st.session_state.enlarge_image}")
     
     # Back button
     if st.button("⬅ Back to Gallery"):
