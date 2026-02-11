@@ -171,7 +171,7 @@ If you use FluoroBoxer in your research, please cite the corresponding paper and
 
 **GitHub:** https://github.com/LSUHSC-CAIPP-Core-B/FluoroBoxer
 
-## *Reproducible Image Analysis**: Parameter tracking enables consistent, reproducible analysis across experiments
+## **Reproducible Image Analysis**: Parameter tracking enables consistent, reproducible analysis across experiments
 
 ## License
 
