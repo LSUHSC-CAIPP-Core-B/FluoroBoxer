@@ -73,8 +73,10 @@ Data/
 ├── Necroptosis/           # Cell death type directory (or other death pathways)
 │   ├── MEF_Phase/         # Phase-contrast images (reference channel)
 │   ├── MEF_Green/         # SYTOX Green fluorescence images (reference signal)
-│   ├── MEF_Labeled_phase/ # Annotated phase-contrast images
-│   ├── MEF_Masks_phase/   # Segmentation masks from fluorescence
+│   ├── MEF_Phase_crop/    # Cropped Phase-contrast images(128×128)
+│   ├── MEF_Green_crop/    # Cropped fluorescence images (128×128)
+│   ├── MEF_Labeled_phase/ # Annotated phase-contrast images (128×128)
+│   ├── MEF_Masks_phase/   # Segmentation masks from fluorescence (128×128)
 │   └── MEF_*_aug/         # Augmented image patches (128×128)
 └── final_Data_set/        # Processed dataset
     ├── images/
