@@ -2,8 +2,6 @@ import cv2
 import imutils
 import numpy as np
 import pandas as pd
-import os
-
 # Set of functions to work with dataset
 
 def get_bboxes(img_dilation, dims=False):
@@ -188,7 +186,7 @@ def crop_img_from_label(img, yolo_label, padding=0, retCords=False, withMask=Fal
     x, y, w, h = yolo_to_original(img, yolo_label)
     img_height, img_width = img.shape[:2]
     if img_mask is None:
-        img_mask = np.zeros((img_width, img_height))
+        img_mask = np.zeros((img_height, img_width), dtype=np.uint8)
         img_mask = cv2.rectangle(img_mask, (x,y), (x+w,y+h), (255,255,255), -1)
 
     if padding != 0:

@@ -11,9 +11,16 @@ PreprocessVal = CellProcessor.PreprocessVal
 st.set_page_config(layout="wide", page_title="Cell Image Projection")
 
 st.sidebar.header("Select Dataset")
+dataset_df = list_dataset()
+
+
+def _dataset_option(row):
+    return f"{int(row['ID'])}: {row['Description']}"
+
+
 dataset_number = st.sidebar.selectbox(
     "Dataset", 
-    [f"{str(i)}: {use_dataset(1)['Description']}" for i in range(1, (get_dataset_len()) + 1)],
+    [_dataset_option(row) for _, row in dataset_df.iterrows()],
     index=0
 )
 
@@ -25,11 +32,18 @@ PHASE_PATH = os.path.join(dataset['Image_path'], dataset['Death_type'],  dataset
 if 'curr_image_num' not in st.session_state:
     st.session_state.curr_image_num = 0
 
-    st.session_state.images = [
+if st.session_state.get("active_dataset") != dataset_number:
+    st.session_state.images = sorted(
         file for file in os.listdir(GREEN_PATH)
         if file.lower().endswith(('png', 'jpg', 'jpeg'))
-    ]
+    )
     st.session_state.len_images = len(st.session_state.images)
+    st.session_state.curr_image_num = 0
+    st.session_state.active_dataset = dataset_number
+
+if st.session_state.len_images == 0:
+    st.error(f"No image files found in {GREEN_PATH}")
+    st.stop()
 
 # Initialize enlarge state
 if 'enlarge_mode' not in st.session_state:
@@ -110,8 +124,8 @@ with col3:
 st.sidebar.write(f"Image {st.session_state.curr_image_num + 1} / {st.session_state.len_images}")
 
 # Load and process current image
-green_image_path = GREEN_PATH + st.session_state.images[st.session_state.curr_image_num]
-base_image_path = PHASE_PATH + st.session_state.images[st.session_state.curr_image_num]
+green_image_path = os.path.join(GREEN_PATH, st.session_state.images[st.session_state.curr_image_num])
+base_image_path = os.path.join(PHASE_PATH, st.session_state.images[st.session_state.curr_image_num])
 
 st.sidebar.info(f"Current: {st.session_state.images[st.session_state.curr_image_num]}")
 
@@ -163,7 +177,7 @@ if not st.session_state.enlarge_mode:
     with col2:
         brightness_col_title, brightness_col_toggle, brightness_col_enlarge = st.columns([2, 1, 1], vertical_alignment="bottom")
         with brightness_col_title:
-            st.subheader("Brightness/Constrast")
+            st.subheader("Brightness/Contrast")
         
         with brightness_col_toggle:
             if st.toggle("Cell Boxing", key="brightness_toggle"):
