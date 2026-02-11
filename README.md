@@ -1,5 +1,7 @@
 # FluoroBoxer
 
+![FluoroBoxer logo](assets/fluoroboxer-logo.svg)
+
 FluoroBoxer is a reproducible annotation pipeline for detecting dead cells in phase-contrast microscopy images.
 It uses SYTOX Green fluorescence as a reference channel to generate bounding boxes for model training, minimizing manual labeling effort while preserving annotation quality.
 

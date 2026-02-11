@@ -1,0 +1,54 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FluoroBoxer Logo</title>
+  <desc id="desc">A fluorescent cell-themed emblem with a bounding box and the text FluoroBoxer.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#081126"/>
+      <stop offset="100%" stop-color="#12203A"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#59F7B8"/>
+      <stop offset="100%" stop-color="#16D4E8"/>
+    </linearGradient>
+    <linearGradient id="wordmark" x1="280" y1="130" x2="980" y2="300">
+      <stop offset="0%" stop-color="#E8FFF4"/>
+      <stop offset="100%" stop-color="#A7D5FF"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="420" rx="28" fill="url(#bg)"/>
+
+  <g transform="translate(60,50)">
+    <circle cx="140" cy="160" r="120" fill="#0D1931" stroke="#1D355D" stroke-width="4"/>
+
+    <g filter="url(#softGlow)">
+      <rect x="78" y="98" width="124" height="124" rx="22" stroke="url(#glow)" stroke-width="10" fill="none"/>
+    </g>
+
+    <circle cx="140" cy="160" r="40" fill="#7CFFD1" fill-opacity="0.25"/>
+    <circle cx="118" cy="144" r="12" fill="#9BFFE2"/>
+    <circle cx="155" cy="130" r="9" fill="#6DEDE0"/>
+    <circle cx="164" cy="170" r="14" fill="#4FECC2"/>
+    <circle cx="124" cy="184" r="8" fill="#91F2FF"/>
+
+    <path d="M62 254 L218 254" stroke="#274874" stroke-width="10" stroke-linecap="round"/>
+    <rect x="100" y="254" width="80" height="24" rx="10" fill="#1D355D"/>
+  </g>
+
+  <g>
+    <text x="290" y="190" fill="url(#wordmark)" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="102" font-weight="800" letter-spacing="1.2">
+      FluoroBoxer
+    </text>
+    <text x="292" y="248" fill="#7CD2FF" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="35" font-weight="500" letter-spacing="2.5">
+      Fluorescence-guided cell annotation
+    </text>
+  </g>
+</svg>
