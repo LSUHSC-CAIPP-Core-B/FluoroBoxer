@@ -174,18 +174,6 @@ Run notebook:
 
 ---
 
-## Publishing Checklist (Maintainers)
-
-Before tagging a release:
-
-1. Confirm notebooks run top-to-bottom in a supported Python environment with current dependency versions.
-2. Validate at least one end-to-end dataset pass (annotation → augmentation → split).
-3. Verify class mappings for any label remapping tasks.
-4. Confirm sample visual QA in `verify_yolo_bounding_boxes.ipynb`.
-5. Update README and changelog/release notes.
-
----
-
 ## Citation
 
 If FluoroBoxer contributes to your work, please cite the repository and associated publication.
