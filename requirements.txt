@@ -15,16 +15,6 @@ albumentations>=1.2.0
 # Web Interface
 streamlit>=1.0.0
 
-# Deep Learning & TensorFlow
-tensorflow>=2.8.0
-protobuf>=3.20.0,<4.0.0
-tensorflow-hub>=0.12.0
-
-# Object Detection (TensorFlow Object Detection API)
-# Provides dataset_util, label_map_util for convert_xml_to_tfrecord.py
-# Install with: pip install tensorflow-models-official
-# Or from source: pip install git+https://github.com/tensorflow/models.git
-
 # Visualization & Plotting
 matplotlib>=3.4.0
 plotly>=5.0.0
@@ -37,3 +27,6 @@ jupyter>=1.0.0
 ipython>=7.0.0
 nbformat>=5.0.0
 nbconvert>=6.0.0
+
+# Test runner
+pytest>=7.0.0

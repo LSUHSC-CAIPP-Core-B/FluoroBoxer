@@ -4,8 +4,24 @@ import random
 from datetime import datetime
 import streamlit as st
 
-from CellProcessor import *
-PreprocessVal = CellProcessor.PreprocessVal
+from CellProcessor import (
+    PreprocessVal,
+    draw_contours,
+    list_dataset,
+    list_variables,
+    process_image,
+    read_image,
+    use_dataset,
+)
+
+
+def _show_image(image):
+    try:
+        st.image(image, width="stretch", clamp=True)
+    except TypeError:
+        # Streamlit < 1.50 expects use_container_width instead of width="stretch".
+        st.image(image, use_container_width=True, clamp=True)
+
 
 # Page config
 st.set_page_config(layout="wide", page_title="Cell Image Projection")
@@ -90,7 +106,7 @@ saveParamInput = saveParameters.text_input("Description", placeholder="Enter Des
 if saveParameters.button("Save"):
     if saveParamInput:
         save_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-        df = CellProcessor.list_variables()
+        df = list_variables()
 
         last_index = int(df["ID"].iloc[-1]) + 1
         new_row = [last_index, save_time, brightness_val, contrast_val, threshold_val, i_erode_val, i_dialate_val, saveParamInput]
@@ -157,7 +173,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Input"
                 st.rerun()
-        st.image(img, use_container_width=True, clamp=True)
+        _show_image(img)
         
         erosion_col_title, erosion_col_toggle, erosion_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with erosion_col_title:
@@ -172,7 +188,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Erosion"
                 st.rerun()
-        st.image(img_erosion, use_container_width=True, clamp=True)
+        _show_image(img_erosion)
 
     with col2:
         brightness_col_title, brightness_col_toggle, brightness_col_enlarge = st.columns([2, 1, 1], vertical_alignment="bottom")
@@ -188,7 +204,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Brightness/Contrast"
                 st.rerun()
-        st.image(img_br, use_container_width=True, clamp=True)
+        _show_image(img_br)
         
         dilation_col_title, dilation_col_toggle, dilation_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with dilation_col_title:
@@ -203,7 +219,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Dilation"
                 st.rerun()
-        st.image(img_dilation, use_container_width=True, clamp=True)
+        _show_image(img_dilation)
 
     with col3:
         threshold_col_title, threshold_col_toggle, threshold_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
@@ -219,7 +235,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Threshold"
                 st.rerun()
-        st.image(img_thr, use_container_width=True, clamp=True)
+        _show_image(img_thr)
         
         output_col_title, output_col_toggle, output_col_enlarge = st.columns([2, 2, 1], vertical_alignment="bottom")
         with output_col_title:
@@ -234,7 +250,7 @@ if not st.session_state.enlarge_mode:
                 st.session_state.enlarge_mode = True
                 st.session_state.enlarge_image = "Output"
                 st.rerun()
-        st.image(img_out, use_container_width=True, clamp=True)
+        _show_image(img_out)
 else:
     # Enlarge view
     st.title(f"Cell Image Projection - {st.session_state.enlarge_image}")
@@ -249,33 +265,33 @@ else:
         st.toggle("Cell Boxing", key="input_toggle")
         if st.session_state.input_toggle:
             img = draw_contours(img_dilation, img) 
-        st.image(img, use_container_width=True, clamp=True)
+        _show_image(img)
 
     elif st.session_state.enlarge_image == "Brightness/Contrast":
         st.toggle("Cell Boxing", key="brightness_toggle")
         if st.session_state.brightness_toggle:
             img_br = draw_contours(img_dilation, img_br)
-        st.image(img_br, use_container_width=True, clamp=True)
+        _show_image(img_br)
 
     elif st.session_state.enlarge_image == "Erosion":
         st.toggle("Cell Boxing", key="erosion_toggle")
         if st.session_state.erosion_toggle:
             img_erosion = draw_contours(img_dilation, img_erosion)
-        st.image(img_erosion, use_container_width=True, clamp=True)
+        _show_image(img_erosion)
 
     elif st.session_state.enlarge_image == "Dilation":
         st.toggle("Cell Boxing", key="dilation_toggle")
         if st.session_state.dilation_toggle:
             img_dilation = draw_contours(img_dilation, img_dilation)
-        st.image(img_dilation, use_container_width=True, clamp=True)
+        _show_image(img_dilation)
 
     elif st.session_state.enlarge_image == "Threshold":
         st.toggle("Cell Boxing", key="threshold_toggle")
         if st.session_state.threshold_toggle:
             img_thr = draw_contours(img_dilation, img_thr)
-        st.image(img_thr, use_container_width=True, clamp=True)
+        _show_image(img_thr)
 
     elif st.session_state.enlarge_image == "Output":
         if not st.toggle("Cell Boxing", value=True, key="output_toggle"):
             img_out = img_base
-        st.image(img_out, use_container_width=True, clamp=True)
+        _show_image(img_out)

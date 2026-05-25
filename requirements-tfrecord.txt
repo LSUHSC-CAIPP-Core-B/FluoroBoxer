@@ -1,0 +1,8 @@
+# Standalone dependencies for TFRecord export.
+# Use these in a dedicated environment for `convert_xml_to_tfrecord.py`.
+# This avoids resolver conflicts between TensorFlow 2.13 on Python 3.8 and the
+# newer Streamlit/typing stack used by the main application workflow.
+pandas>=1.3.0
+Pillow>=9.0.0
+tensorflow==2.13.1; python_version < "3.9"
+tensorflow==2.20.0; python_version >= "3.13"

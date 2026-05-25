@@ -2,6 +2,7 @@ import cv2
 import imutils
 import numpy as np
 import pandas as pd
+from typing import Any, Dict
 # Set of functions to work with dataset
 
 def get_bboxes(img_dilation, dims=False):
@@ -249,7 +250,7 @@ def list_dataset() -> pd.DataFrame:
     """
     return pd.read_csv("dataset.csv")
 
-def use_variables(ID) -> dict[str, dict[int, str]]:
+def use_variables(ID) -> Dict[str, Any]:
     """Reads from params.csv and generates a pd.Dataframe.
     Filters Dataframe by ID and returns it converted to a dict
 
@@ -261,7 +262,7 @@ def use_variables(ID) -> dict[str, dict[int, str]]:
     selected_row = df[df["ID"] == ID]
     return selected_row.iloc[0].to_dict()
 
-def use_dataset(ID) -> dict[str, dict[int, str]]:
+def use_dataset(ID) -> Dict[str, Any]:
     """Reads from dataset.csv and generates a pd.Dataframe
     Filters Dataframe by ID and returns it converted to a dict
 

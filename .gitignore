@@ -136,6 +136,9 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv-tfrecord
+.venv13
+.venv38
 env/
 venv/
 ENV/
@@ -179,3 +182,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Repository-generated artifacts
+Data/final_Data_set/TFRecord_output/
+Data/final_Data_set/example_boxes_vizulazition/*.png
+*.record

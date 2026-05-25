@@ -2,6 +2,8 @@
 
 ![FluoroBoxer logo](assets/fluoroboxer-logo.svg)
 
+[![Python Compatibility](https://github.com/LSUHSC-CAIPP-Core-B/FluoroBoxer/actions/workflows/python-compat.yml/badge.svg)](https://github.com/LSUHSC-CAIPP-Core-B/FluoroBoxer/actions/workflows/python-compat.yml)
+
 FluoroBoxer is a reproducible annotation pipeline for detecting dead cells in phase-contrast microscopy images.
 It uses SYTOX Green fluorescence as a reference channel to generate bounding boxes for model training, minimizing manual labeling effort while preserving annotation quality.
 
@@ -30,6 +32,7 @@ FluoroBoxer/
 ├── convert_xml_to_tfrecord.py        # Pascal VOC XML → TFRecord converter
 ├── verify_yolo_bounding_boxes.ipynb  # Visual label verification
 ├── dataset.csv                       # Dataset registry for Streamlit app
+├── labels.pbtxt                      # Default label map for TFRecord export
 ├── params.csv                        # Saved preprocessing parameter registry
 └── Data/                             # Local dataset storage (raw, intermediate, exports)
 ```
@@ -62,18 +65,47 @@ Data/
 ## Installation
 
 ```bash
-python3 -m venv .venv
+python3.13 -m venv .venv
+# or: python3.8 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+FluoroBoxer is currently validated on Python 3.8 and Python 3.13 for the core app and tests.
+
+### Compatibility Matrix
+
+- Python 3.8: supported for the core workflow and test suite
+- Python 3.13: supported for the core workflow and test suite
+- Continuous verification: `.github/workflows/python-compat.yml` runs the test suite on both versions
+
+### Optional TFRecord export dependencies
+
+The TFRecord converter depends on TensorFlow but no longer requires the TensorFlow Object Detection API.
+The exporter is validated on both supported Python versions, but the TensorFlow stack is version-specific:
+
+- Python 3.8 installs `tensorflow==2.13.1`
+- Python 3.13 installs `tensorflow==2.20.0`
+
+Create a dedicated environment for TFRecord export:
+
+```bash
+python3.13 -m venv .venv-tfrecord
+# or: python3.8 -m venv .venv-tfrecord
+source .venv-tfrecord/bin/activate
+pip install --upgrade pip
+pip install -r requirements-tfrecord.txt
+```
+
+`labels.pbtxt` is included in the repository for the default single-class export path used by the bundled XML examples.
+
 ### Key runtime dependencies
 
-- Python 3.9+
+- Python 3.8 or Python 3.13 for the core workflow
 - OpenCV, NumPy, Pandas
 - Streamlit
-- TensorFlow + TensorFlow Object Detection API (for TFRecord conversion script)
+- TensorFlow (optional, for TFRecord conversion)
 
 ---
 
@@ -121,8 +153,10 @@ python convert_xml_to_tfrecord.py \
   --xml_dir ./Data/final_Data_set/xml_outputs \
   --labels_path ./labels.pbtxt \
   --output_path ./Data/final_Data_set/TFRecord_output/dataset.record \
-  --image_dir ./Data/final_Data_set/images/train
+  --image_dir ./Data/final_Data_set/images
 ```
+
+If TensorFlow export dependencies are missing, the script exits with guidance to install `requirements-tfrecord.txt`.
 
 ### 7) Verify labels
 
@@ -144,7 +178,7 @@ Run notebook:
 
 Before tagging a release:
 
-1. Confirm notebooks run top-to-bottom with current dependency versions.
+1. Confirm notebooks run top-to-bottom in a supported Python environment with current dependency versions.
 2. Validate at least one end-to-end dataset pass (annotation → augmentation → split).
 3. Verify class mappings for any label remapping tasks.
 4. Confirm sample visual QA in `verify_yolo_bounding_boxes.ipynb`.
