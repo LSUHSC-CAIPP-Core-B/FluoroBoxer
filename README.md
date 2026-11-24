@@ -26,6 +26,7 @@ FluoroBoxer/
 ├── cell_image_projection.py          # Streamlit app for parameter tuning and visual QA
 ├── annotate_cell_images.ipynb        # Main automatic annotation workflow (YOLO labels)
 ├── prepare_background_images.ipynb   # Background/negative sample extraction
+├── biological_train_validation_test_split.ipynb # Split raw data by well or batch
 ├── augment_dataset.ipynb             # Augment images and labels
 ├── train_validation_test_split.ipynb # Build train/val/test partitions
 ├── convert_yolo_to_pascal_voc.ipynb  # YOLO → Pascal VOC conversion
@@ -118,6 +119,21 @@ streamlit run cell_image_projection.py
 ```
 
 Use the sidebar to select a dataset, navigate images, and tune parameters. Save stable settings to `params.csv`.
+
+### Optional: split by biological unit before annotation
+
+Run `biological_train_validation_test_split.ipynb` for the raw data in
+`Data/DeathScope_YOLOv8_DataSet`. Run this **before `annotate_cell_images.ipynb`** (step 2). The default split keeps all fields, time points, and paired phase/Green
+images from a well in one partition, with configurable ratios and seed. Confirm
+that wells are the appropriate biological units for your experiment; batch-level
+splitting is also available.
+
+The notebook previews assignments, reports unmatched channels, and copies paired
+raw images into `Data/DeathScope_biological_split/{train,val,test}/Batch*/...`,
+with a reproducible manifest. Follow its configuration examples to annotate each
+partition independently, then augment training data only. Keep validation/test
+unaugmented and preserve these assignments when collecting YOLO files; skip the
+random splitting notebook in step 5 for this workflow.
 
 ### 2) Generate annotations
 
