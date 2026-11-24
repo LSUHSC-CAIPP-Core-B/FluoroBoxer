@@ -1,5 +1,3 @@
-# FluoroBoxer
-
 ![FluoroBoxer logo](assets/fluoroboxer-logo.svg)
 
 [![Python Compatibility](https://github.com/LSUHSC-CAIPP-Core-B/FluoroBoxer/actions/workflows/python-compat.yml/badge.svg)](https://github.com/LSUHSC-CAIPP-Core-B/FluoroBoxer/actions/workflows/python-compat.yml)
